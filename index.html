@@ -3,14 +3,45 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>McDonald's Order</title>
+	<title>McDonald's Dollar Menu</title>
+
+
+
+<!--CSS for pics-->
+
+	<style>
+
+		#orderImages {
+			display: flex;
+			gap: 20px;
+		}
+
+		#orderImages img {
+			width: 200px;
+		}
+
+	</style>
+
+
+
+
 </head>
 
 <body>
 
-	<h1>McDonald's Order Menu</h1>
 
 
+
+
+
+
+
+
+
+	<h1>McDonalds Dollar Menu</h1>
+
+
+	<!-- BIG MAC -->
 	<h2>
 		<input type="checkbox" id="bigMac">
 		<label for="bigMac">Big Mac</label>
@@ -25,13 +56,60 @@
 	<label for="tomato">Add Tomato</label>
 
 
+
+	<!-- FRIES -->
 	<h2>
 		<input type="checkbox" id="fries">
 		<label for="fries">Fries</label>
 	</h2>
 
-	<input type="checkbox" id="salt">
-	<label for="salt">Add Salt</label>
+
+
+
+<!--radio box instead of checkbox so u can select only 1-->
+
+	<input type="radio" id="smallFries" name="friesSize" 
+	onclick="toggleRadio(this)">
+	<label for="smallFries">Small</label>
+
+
+	<br>
+
+	<input type="radio" id="mediumFries" name="friesSize"
+	onclick="toggleRadio(this)">
+	<label for="mediumFries">Medium</label>
+	<br>
+
+	<input type="radio" id="largeFries" name="friesSize"
+	onclick="toggleRadio(this)">
+	<label for="largeFries">Large</label>
+
+
+
+
+
+
+	<!-- DRINK -->
+	<h2>
+		<input type="checkbox" id="drink">
+		<label for="drink">Drink</label>
+	</h2>
+
+	<input type="radio" id="coke" name="drinkType"
+	onclick="toggleRadio(this)">
+	<label for="coke">Coke</label>
+
+	<br>
+
+	<input type="radio" id="pepsi" name="drinkType"
+	onclick="toggleRadio(this)">
+	<label for="pepsi">Pepsi</label>
+
+	<br>
+	<input type="radio" id="water" name="drinkType"
+	onclick="toggleRadio(this)">
+	<label for="water">Water</label>
+
 
 
 	<br><br>
@@ -41,10 +119,206 @@
 
 	<h2>Your Order:</h2>
 
-	<p id="orderResult">
-		Select your food above.
-	</p>
 
+	<!-- IMAGES APPEAR HERE -->
+
+	<div id="orderImages">
+
+		<img id="burgerImage" style="display:none;">
+
+		<img id="friesImage" style="display:none;">
+
+		<img id="drinkImage" style="display:none;">
+
+	</div>
+
+
+
+
+<!--JAVA-->
+	<script>
+
+
+		// Allows radio buttons to be deselected
+
+		function toggleRadio(radio) {
+
+			if (radio.dataset.selected == "true") {
+
+				radio.checked = false;
+				radio.dataset.selected = "false";
+
+			} else {
+
+				let group = document.getElementsByName(radio.name);
+
+				for (let i = 0; i < group.length; i++) {
+					group[i].dataset.selected = "false";
+				}
+
+				radio.dataset.selected = "true";
+
+			}
+
+		}
+
+
+
+		// PLACE ORDER
+
+		function makeOrder() {
+
+
+			// BURGER
+
+			let bigMac = document.getElementById("bigMac").checked;
+			let cheese = document.getElementById("cheese").checked;
+			let tomato = document.getElementById("tomato").checked;
+
+			let burgerImage = document.getElementById("burgerImage");
+
+
+			if (bigMac == true) {
+
+				burgerImage.style.display = "block";
+
+
+				if (cheese == true && tomato == true) {
+
+					burgerImage.src = "images/image4.png";
+
+				}
+
+				else if (cheese == true) {
+
+					burgerImage.src = "images/image2.png";
+
+				}
+
+				else if (tomato == true) {
+
+					burgerImage.src = "images/image3.png";
+
+				}
+
+				else {
+
+					burgerImage.src = "images/image1.png";
+
+				}
+
+			}
+
+			else {
+
+				burgerImage.style.display = "none";
+
+			}
+
+
+
+
+
+			// FRIES
+
+			let fries = document.getElementById("fries").checked;
+			let smallFries = document.getElementById("smallFries").checked;
+			let mediumFries = document.getElementById("mediumFries").checked;
+			let largeFries = document.getElementById("largeFries").checked;
+
+			let friesImage = document.getElementById("friesImage");
+
+
+			if (fries == true) {
+
+				if (smallFries == true) {
+
+					friesImage.src = "images/image8.png";
+					friesImage.style.display = "block";
+
+				}
+
+				else if (mediumFries == true) {
+
+					friesImage.src = "images/image9.png";
+					friesImage.style.display = "block";
+
+				}
+
+				else if (largeFries == true) {
+
+					friesImage.src = "images/image10.png";
+					friesImage.style.display = "block";
+
+				}
+
+				else {
+
+					friesImage.style.display = "none";
+
+				}
+
+			}
+
+			else {
+
+				friesImage.style.display = "none";
+
+			}
+
+
+
+			// DRINK
+
+			let drink = document.getElementById("drink").checked;
+			let coke = document.getElementById("coke").checked;
+			let pepsi = document.getElementById("pepsi").checked;
+			let water = document.getElementById("water").checked;
+
+			let drinkImage = document.getElementById("drinkImage");
+
+
+			if (drink == true) {
+
+				if (coke == true) {
+
+					drinkImage.src = "images/image5.png";
+					drinkImage.style.display = "block";
+
+				}
+
+				else if (pepsi == true) {
+
+					drinkImage.src = "images/image6.png";
+					drinkImage.style.display = "block";
+
+				}
+
+				else if (water == true) {
+
+					drinkImage.src = "images/image7.png";
+					drinkImage.style.display = "block";
+
+				}
+
+				else {
+
+					drinkImage.style.display = "none";
+
+				}
+
+			}
+
+			else {
+
+				drinkImage.style.display = "none";
+
+			}
+
+		}
+
+
+	</script>
 
 
 </body>
